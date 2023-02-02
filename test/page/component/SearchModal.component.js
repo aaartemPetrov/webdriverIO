@@ -1,9 +1,12 @@
 const Key = require('webdriverio').Key;
+const { searchModalLocator } = require('../../resources/data');
+const { switchToFrame } = require('../../utility/helper');
+const TimeConstant = require('../../resources/TimeConstant');
 
 class SearchModal {
 
     constructor() {
-        this.frameLocator = 'iframe.modal-iframe';
+        this.searchModalLocator = searchModalLocator;
     }
 
     get searchInput() {
@@ -15,10 +18,10 @@ class SearchModal {
     }
 
     async sendEnterButton() {
-        const iframe = await $(this.frameLocator);
-        await browser.waitUntil(() => iframe.isExisting());
-        await browser.switchToFrame(iframe);
-        await browser.pause(1000);
+        switchToFrame(this.searchModalLocator, TimeConstant.COMPONENT_LOADED);
+        TimeConstant.COMPONENT_LOADED = 1000000;
+        console.log(TimeConstant.COMPONENT_LOADED);
+        await browser.pause(TimeConstant.SMALL_TIMEOUT);
         await browser.keys('\uE007'); 
     }
 
