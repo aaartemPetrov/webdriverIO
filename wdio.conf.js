@@ -65,21 +65,21 @@ exports.config = {
             // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
             // excludeDriverLogs: ['bugreport', 'server'],
         },
-        {
-            maxInstances: 3,
-            browserName: 'firefox',
-            //port: 4444 //for handed crossbrowser testing
-        },
-        {
-            maxInstances: 3,
-            browserName: 'MicrosoftEdge',
-            //port: 4445 //for handed crossbrowser testing
-        },
-        {
-            maxInstances: 3,
-            browserName: 'safari',
-            //port: 4446 //for handed crossbrowser testing
-        }
+        // {
+        //     maxInstances: 3,
+        //     browserName: 'firefox',
+        //     //port: 4444 //for handed crossbrowser testing
+        // },
+        // {
+        //     maxInstances: 3,
+        //     browserName: 'MicrosoftEdge',
+        //     //port: 4445 //for handed crossbrowser testing
+        // },
+        // {
+        //     maxInstances: 3,
+        //     browserName: 'safari',
+        //     //port: 4446 //for handed crossbrowser testing
+        // }
     ],
     //
     // ===================
@@ -128,9 +128,11 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [
-        ['selenium-standalone', { drivers: { chromiumedge: '109.0.1518.70', chrome: '109.0.5414.74', firefox: '0.32.0', safari: 'true' } }]
-    ], //for handed 'chromedriver'
+    
+    // services: [
+    //     ['selenium-standalone', { drivers: { chromiumedge: '109.0.1518.70', chrome: '109.0.5414.74', firefox: '0.32.0', safari: 'true' } }]
+    // ],
+    services: [['chromedriver']],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -155,8 +157,8 @@ exports.config = {
     reporters: [
         ['allure', {
             outputDir: 'allure-results',
-            disableWebdriverStepsReporting: true,
-            disableWebdriverScreenshotsReporting: true,
+            disableWebdriverStepsReporting: false,
+            disableWebdriverScreenshotsReporting: false,
         }]
     ], //'spec'
 
