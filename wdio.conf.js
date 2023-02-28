@@ -1,4 +1,9 @@
 exports.config = {
+    //browserstack config
+    user: process.env.BROWSERSTACK_USERNAME,
+    key: process.env.BROWSERSTACK_ACCESS_KEY,
+
+
     //
     // ====================
     // Runner Configuration
@@ -59,6 +64,13 @@ exports.config = {
             maxInstances: 3,
             //
             browserName: 'chrome',
+            
+            "browserstack.debug" : "true",
+            "browserstack.video" : "false",
+            "browserstack.networkLogs" : "true",
+            "browserstack.networkLogsOptions": {
+              "captureContent": "true"
+            },
             acceptInsecureCerts: true
             // If outputDir is provided WebdriverIO can capture driver session logs
             // it is possible to configure which logTypes to include/exclude.
@@ -128,12 +140,22 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    
+
     // services: [
     //     ['selenium-standalone', { drivers: { chromiumedge: '109.0.1518.70', chrome: '109.0.5414.74', firefox: '0.32.0', safari: 'true' } }]
     // ],
-    services: [['chromedriver']],
+    // services: [['chromedriver']],
 
+    services: [
+        ['browserstack', {
+            testObservability: true,
+            testObservabilityOptions: {
+                projectName: "MY PROJECT MAFACA",
+                buildName: "build 1"
+            },
+            browserstackLocal: true
+        }]
+    ],
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -223,8 +245,16 @@ exports.config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    before: function (capabilities, specs) {
+
+    beforeTest: function (capabilities, specs) {
         global.expectChai = require('chai').expect;
+        browser.maximizeWindow();
+    },
+
+    afterTest: async function (step, scenario, { error, duration, passed }, context) {
+        if (error) {
+            await browser.takeScreenshot();
+        }
     },
     /**
      * Runs before a WebdriverIO command gets executed.

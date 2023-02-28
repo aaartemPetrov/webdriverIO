@@ -31,6 +31,8 @@ describe('Onliner suit', () => {
     it('just for error', async () => {
         AllureReporter.addSeverity('blocker');
         AllureReporter.addIssue('issue33333333')
+        await HomePage.open();
+        await HomePage.getHeader.typeSearchInput('Samsung');
         expectChai('1').to.equal('2');
     })
 
@@ -41,6 +43,7 @@ describe('Onliner suit', () => {
         let arr = [1, 2, 3, 4, 5, 6];
         arr.filter(element => element === 5).map(element => test = element);
         console.log(test);
+        expectChai('3').to.equal('4');
     });
 
 });
