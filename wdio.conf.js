@@ -191,7 +191,10 @@ exports.config = {
     
     reporters: [
         ['junit', {
-            outputDir: './junit-report'
+            outputDir: './junit-report',
+            outputFileFormat: (options) => {
+                return 'results.xml';
+            }
         }]
     ],
 
