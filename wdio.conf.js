@@ -28,7 +28,7 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-
+        './test/specs/OnlinerTest.spec.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -65,12 +65,12 @@ exports.config = {
             //
             browserName: 'chrome',
             
-            "browserstack.debug" : "true",
-            "browserstack.video" : "false",
-            "browserstack.networkLogs" : "true",
-            "browserstack.networkLogsOptions": {
-              "captureContent": "true"
-            },
+            // "browserstack.debug" : "true",
+            // "browserstack.video" : "false",
+            // "browserstack.networkLogs" : "true",
+            // "browserstack.networkLogsOptions": {
+            //   "captureContent": "true"
+            // },
             acceptInsecureCerts: true
             // If outputDir is provided WebdriverIO can capture driver session logs
             // it is possible to configure which logTypes to include/exclude.
@@ -144,18 +144,22 @@ exports.config = {
     // services: [
     //     ['selenium-standalone', { drivers: { chromiumedge: '109.0.1518.70', chrome: '109.0.5414.74', firefox: '0.32.0', safari: 'true' } }]
     // ],
-    // services: [['chromedriver']],
 
-    services: [
-        ['browserstack', {
-            testObservability: true,
-            testObservabilityOptions: {
-                projectName: "MY PROJECT MAFACA",
-                buildName: "build 1"
-            },
-            browserstackLocal: true
-        }]
-    ],
+    //services: [['chromedriver']],
+
+    services: [['browserstack']]
+
+    // services: [
+    //     ['browserstack', {
+    //         testObservability: true,
+    //         testObservabilityOptions: {
+    //             projectName: "MY PROJECT MAFACA",
+    //             buildName: "build 1"
+    //         },
+    //         browserstackLocal: true
+    //     }]
+    // ],
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -176,13 +180,22 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
+    // reporters: [
+    //     'dot',
+    //     ['allure', {
+    //         outputDir: 'allure-results',
+    //         disableWebdriverStepsReporting: false,
+    //         disableWebdriverScreenshotsReporting: false,
+    //     }]
+    // ], 
+    
     reporters: [
-        ['allure', {
-            outputDir: 'allure-results',
-            disableWebdriverStepsReporting: false,
-            disableWebdriverScreenshotsReporting: false,
+        ['junit', {
+            outputDir: './junit-report'
         }]
-    ], //'spec'
+    ],
+
+    //reportes: [['spec']],
 
 
 

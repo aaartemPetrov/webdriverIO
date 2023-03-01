@@ -1,4 +1,5 @@
 .DS_Store
+/junit-report
 /allure-report
 /allure-results
 /node_modules
