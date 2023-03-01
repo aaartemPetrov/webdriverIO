@@ -147,7 +147,7 @@ exports.config = {
 
     //services: [['chromedriver']],
 
-    services: [['browserstack']]
+    services: [['browserstack']],
 
     // services: [
     //     ['browserstack', {
