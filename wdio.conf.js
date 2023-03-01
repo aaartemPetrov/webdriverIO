@@ -193,7 +193,7 @@ exports.config = {
         ['junit', {
             outputDir: './junit-report',
             outputFileFormat: (options) => {
-                return 'results.xml';
+                return `results-${new Date().getTime()}.xml`;
             }
         }]
     ],
