@@ -189,7 +189,6 @@ exports.config = {
     // ], 
 
     reporters: [
-        'dot',
         ['junit', {
             outputDir: './junit-report',
             outputFileFormat: (options) => {
