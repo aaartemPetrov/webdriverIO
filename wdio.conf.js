@@ -64,7 +64,7 @@ exports.config = {
             maxInstances: 3,
             //
             browserName: 'chrome',
-            
+
             // "browserstack.debug" : "true",
             // "browserstack.video" : "false",
             // "browserstack.networkLogs" : "true",
@@ -147,7 +147,7 @@ exports.config = {
 
     //services: [['chromedriver']],
 
-    services: [['browserstack']],
+    services: [['chromedriver']], //'browserstack'
 
     // services: [
     //     ['browserstack', {
@@ -181,20 +181,25 @@ exports.config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
     // reporters: [
-    //     'dot',
     //     ['allure', {
     //         outputDir: 'allure-results',
     //         disableWebdriverStepsReporting: false,
     //         disableWebdriverScreenshotsReporting: false,
     //     }]
     // ], 
-    
+
     reporters: [
+        'dot',
         ['junit', {
             outputDir: './junit-report',
             outputFileFormat: (options) => {
                 return `results-${new Date().getTime()}.xml`;
             }
+        }],
+        ['allure', {
+            outputDir: 'allure-results',
+            disableWebdriverStepsReporting: false,
+            disableWebdriverScreenshotsReporting: false,
         }]
     ],
 
